@@ -17,7 +17,6 @@ var slapp = Slapp({
   context: Context()
 })
 
-
 var HELP_TEXT = `
 I will respond to the following messages:
 \`help\` - to see this message.
@@ -27,9 +26,9 @@ I will respond to the following messages:
 \`attachment\` - to see a Slack attachment message.
 `
 
-//*********************************************
+// *********************************************
 // Setup different handlers for messages
-//*********************************************
+// *********************************************
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
@@ -78,7 +77,7 @@ slapp
     msg
       .say('Thanks for sharing.')
       .say(`Here's what you've told me so far: \`\`\`${JSON.stringify(state)}\`\`\``)
-    // At this point, since we don't route anywhere, the "conversation" is over
+  // At this point, since we don't route anywhere, the "conversation" is over
   })
 
 // Can use a regex as well
@@ -94,15 +93,16 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
 })
 
 // Can use a regex as well
-slapp.message(/^(px-123)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
+slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // You can provide a list of responses, and a random one will be chosen
   // You can also include slack emoji in your responses
-  msg.say([
-    "You're welcome :smile:",
-    'You bet',
-    ':+1: Of course',
-    'Anytime :sun_with_face: :full_moon_with_face:'
-  ])
+  var pattern = /px-(\d+)/i
+  var match = pattern.exec(msg)
+
+  var start = match.index
+  var text = match[0]
+  var end = start + text.length
+  msg.say('Found a Proximus issue: ' + text)
 })
 
 // demonstrate returning an attachment...
