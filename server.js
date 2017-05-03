@@ -94,36 +94,24 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
 
 // Can use a regex as well
 slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
-  // You can provide a list of responses, and a random one will be chosen
-  // You can also include slack emoji in your responses
   var text = (msg.body.event && msg.body.event.text) || ''
   var pattern = /px-(\d+)/ig
   var match = text.match(pattern)
 
-  // var start = match.index
-  // var text = match[0]
-  // var end = start + text.length
-
-  // if there are multiple issues in the text
+  // there may be multiple issues in the text
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
     msg.say({
-      text: 'Found a Proximus JIRA issue ' + issueKey,
+      // text: 'Found a Proximus JIRA issue ' + issueKey,
       attachments: [{
         // text: 'more text',
-        title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+        title: 'Proximus JIRA issue ' + issueKey,
         // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
         title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
         color: '#7CD197'
       }]
     })
   }
-
-// console.log(match[0])
-// console.log(match[1])
-// console.log(match[2])
-// console.log(match[3])
-// msg.say('Found a Proximus issue: ' + text)
 })
 
 // demonstrate returning an attachment...
