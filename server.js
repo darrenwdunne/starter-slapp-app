@@ -97,7 +97,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // You can provide a list of responses, and a random one will be chosen
   // You can also include slack emoji in your responses
   var pattern = /px-(\d+)/i
-  var match = pattern.exec(msg)
+  var match = msg.exec(pattern)
 
   var start = match.index
   var text = match[0]
