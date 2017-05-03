@@ -106,7 +106,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
 
   // if there are multiple issues in the text
   for (var i = 0; i < match.length; i++) {
-    const issueKey = match[i].toUppercase()
+    const issueKey = match[i].toUpperCase()
     msg.say({
       text: 'Found a Proximus JIRA issue',
       attachments: [{
