@@ -102,10 +102,10 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
     msg.say({
-      // text: 'Found a Proximus JIRA issue ' + issueKey,
+      text: 'Proximus JIRA issue ' + issueKey,
       attachments: [{
         // text: 'more text',
-        title: 'Proximus JIRA issue ' + issueKey,
+        title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
         // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
         title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
         color: '#7CD197'
