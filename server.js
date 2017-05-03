@@ -97,11 +97,14 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // You can provide a list of responses, and a random one will be chosen
   // You can also include slack emoji in your responses
   var pattern = /px-(\d+)/i
-  var match = msg.exec(pattern)
+  var match = msg.match(pattern)
 
   var start = match.index
   var text = match[0]
   var end = start + text.length
+  console.log(match[0])
+  console.log(match[1])
+  console.log(match[2])
   msg.say('Found a Proximus issue: ' + text)
 })
 
