@@ -108,10 +108,10 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
     msg.say({
-      text: 'Found a Proximus JIRA issue',
+      text: 'Found a Proximus JIRA issue ' + issueKey,
       attachments: [{
-        text: 'more text',
-        title: issueKey,
+        // text: 'more text',
+        title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
         // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
         title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
         color: '#7CD197'
@@ -119,11 +119,11 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
     })
   }
 
-  // console.log(match[0])
-  // console.log(match[1])
-  // console.log(match[2])
-  // console.log(match[3])
-  // msg.say('Found a Proximus issue: ' + text)
+// console.log(match[0])
+// console.log(match[1])
+// console.log(match[2])
+// console.log(match[3])
+// msg.say('Found a Proximus issue: ' + text)
 })
 
 // demonstrate returning an attachment...
