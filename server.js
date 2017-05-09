@@ -55,6 +55,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // see if we can get the JIRA uid from beepboop persist
   kv.get('uid', function (err, val) {
     if (err) {
+      console.log('uid not found in Persist')
     } else {
       console.log('Found uid in Persist: [' + val + ']')
     }
