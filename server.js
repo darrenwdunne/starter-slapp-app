@@ -6,6 +6,7 @@ const express = require('express')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
+const kv = require('beepboop-persist')()
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
@@ -15,6 +16,16 @@ var slapp = Slapp({
   verify_token: process.env.SLACK_VERIFY_TOKEN,
   convo_store: ConvoStore(),
   context: Context()
+})
+
+kv.list(function (err, keys) {
+  // check for err
+  if (err) {
+  } else {
+    console.log(keys)
+  }
+
+// keys is array of strings like ['key1', 'key2', 'baz3'] 
 })
 
 var HELP_TEXT = `
