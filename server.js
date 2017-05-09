@@ -52,6 +52,14 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   var pattern = /px-(\d+)/ig
   var match = text.match(pattern)
 
+  // see if we can get the JIRA uid from beepboop persist
+  kv.get('uid', function (err, val) {
+    if (err) {
+    } else {
+      console.log('Found uid in Persist: [' + val + ']')
+    }
+  })
+
   // there may be multiple issues in the text
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
