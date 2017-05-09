@@ -21,10 +21,11 @@ var slapp = Slapp({
 kv.list(function (err, keys) {
   // check for err
   if (err) {
+    console.log('ERROR: ' + err)
   } else {
     console.log('kv keys: ' + keys)
+    console.log('kv keys[0]: [' + keys[0] + ']')
   }
-
 // keys is array of strings like ['key1', 'key2', 'baz3']
 })
 
@@ -55,19 +56,21 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   kv.list(function (err, keys) {
     // check for err
     if (err) {
+      console.log('ERROR: ' + err)
     } else {
-      console.log('inside message, kv keys: ' + keys)
+      console.log('inside msg kv keys: ' + keys)
+      console.log('inside msg kv keys[0]: [' + keys[0] + ']')
     }
-
   // keys is array of strings like ['key1', 'key2', 'baz3']
   })
-  kv.get('uid', (err, list) => {
-    if (err) return console.log('Error geting repo from webhook', err)
-    list = list || []
-    list.forEach((vall) => {
-      console.log('vall=[' + vall + ']')
-    })
-  })
+
+  // kv.get(keys[0], (err, list) => {
+  //   if (err) return console.log('Error geting repo from webhook', err)
+  //   list = list || []
+  //   list.forEach((vall) => {
+  //     console.log('vall=[' + vall + ']')
+  //   })
+  // })
 
   // // see if we can get the JIRA uid from beepboop persist
   // kv.get('uid', function (err, val) {
