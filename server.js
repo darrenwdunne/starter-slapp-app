@@ -22,10 +22,10 @@ kv.list(function (err, keys) {
   // check for err
   if (err) {
   } else {
-    console.log(keys)
+    console.log('kv keys: ' + keys)
   }
 
-// keys is array of strings like ['key1', 'key2', 'baz3'] 
+// keys is array of strings like ['key1', 'key2', 'baz3']
 })
 
 var HELP_TEXT = `
