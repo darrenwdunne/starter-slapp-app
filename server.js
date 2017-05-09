@@ -61,6 +61,13 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
 
   // keys is array of strings like ['key1', 'key2', 'baz3']
   })
+  kv.get('uid', (err, list) => {
+    if (err) return console.log('Error geting repo from webhook', err)
+    list = list || []
+    list.forEach((vall) => {
+      console.log('vall=[' + vall + ']')
+    })
+  })
 
   // // see if we can get the JIRA uid from beepboop persist
   // kv.get('uid', function (err, val) {
