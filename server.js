@@ -35,6 +35,28 @@ slapp.message('help', ['mention', 'direct_message'], (msg) => {
   msg.say(HELP_TEXT)
 })
 
+// Respond to a JIRA issue (e.g. PX-1234)
+slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
+  var text = (msg.body.event && msg.body.event.text) || ''
+  var pattern = /px-(\d+)/ig
+  var match = text.match(pattern)
+
+  // there may be multiple issues in the text
+  for (var i = 0; i < match.length; i++) {
+    const issueKey = match[i].toUpperCase()
+    msg.say({
+      text: 'Proximus JIRA issue ' + issueKey,
+      attachments: [{
+        // text: 'more text',
+        title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+        // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
+        title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+        color: '#7CD197'
+      }]
+    })
+  }
+})
+
 // "Conversation" flow that tracks state - kicks off when user says hi, hello or hey
 slapp
   .message('^(hi|hello|hey)$', ['direct_mention', 'direct_message'], (msg, text) => {
@@ -90,28 +112,6 @@ slapp.message(/^(thanks|thank you)/i, ['mention', 'direct_message'], (msg) => {
     ':+1: Of course',
     'Anytime :sun_with_face: :full_moon_with_face:'
   ])
-})
-
-// Can use a regex as well
-slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
-  var text = (msg.body.event && msg.body.event.text) || ''
-  var pattern = /px-(\d+)/ig
-  var match = text.match(pattern)
-
-  // there may be multiple issues in the text
-  for (var i = 0; i < match.length; i++) {
-    const issueKey = match[i].toUpperCase()
-    msg.say({
-      text: 'Proximus JIRA issue ' + issueKey,
-      attachments: [{
-        // text: 'more text',
-        title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-        // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
-        title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-        color: '#7CD197'
-      }]
-    })
-  }
 })
 
 // demonstrate returning an attachment...
