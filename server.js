@@ -62,14 +62,14 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // keys is array of strings like ['key1', 'key2', 'baz3']
   })
 
-  // see if we can get the JIRA uid from beepboop persist
-  kv.get('uid', function (err, val) {
-    if (err) {
-      console.log('uid not found in Persist')
-    } else {
-      console.log('Found uid in Persist: [' + val + ']')
-    }
-  })
+  // // see if we can get the JIRA uid from beepboop persist
+  // kv.get('uid', function (err, val) {
+  //   if (err) {
+  //     console.log('uid not found in Persist')
+  //   } else {
+  //     console.log('Found uid in Persist: [' + val + ']')
+  //   }
+  // })
 
   // there may be multiple issues in the text
   for (var i = 0; i < match.length; i++) {
