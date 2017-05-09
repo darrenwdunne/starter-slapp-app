@@ -52,6 +52,16 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   var pattern = /px-(\d+)/ig
   var match = text.match(pattern)
 
+  kv.list(function (err, keys) {
+    // check for err
+    if (err) {
+    } else {
+      console.log('inside message, kv keys: ' + keys)
+    }
+
+  // keys is array of strings like ['key1', 'key2', 'baz3']
+  })
+
   // see if we can get the JIRA uid from beepboop persist
   kv.get('uid', function (err, val) {
     if (err) {
