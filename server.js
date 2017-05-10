@@ -17,7 +17,7 @@ var slapp = Slapp({
   convo_store: ConvoStore(),
   context: Context()
 })
-
+console.log('Starting')
 kv.list(function (err, keys) {
   // check for err
   if (err) {
