@@ -24,7 +24,7 @@ kv.list(function (err, keys) {
     console.log('ERROR: ' + err)
   } else {
     console.log('kv keys: ' + keys)
-    console.log('kv keys[0]: [' + keys[0] + ']')
+    // console.log('kv keys[0]: [' + keys[0] + ']')
   }
 // keys is array of strings like ['key1', 'key2', 'baz3']
 })
