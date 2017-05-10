@@ -6,7 +6,8 @@ const express = require('express')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
-const kv = require('beepboop-persist')()
+const BeepBoopPersist = require('beepboop-persist')
+var kv = BeepBoopPersist({serialize: false})
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
