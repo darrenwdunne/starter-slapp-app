@@ -32,7 +32,7 @@ kv.list(function (err, keys) {
 // see if we can get the JIRA uid from beepboop persist
 kv.get('uid', function (err, val) {
   if (err) {
-    console.log('uid not found in Persist')
+    console.log('uid not found in Persist!')
   } else {
     console.log('Found uid in Persist: [' + val + ']')
   }
