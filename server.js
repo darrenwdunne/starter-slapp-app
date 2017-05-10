@@ -18,27 +18,8 @@ var slapp = Slapp({
   convo_store: ConvoStore(),
   context: Context()
 })
-console.log('Starting')
-kv.list(function (err, keys) {
-  // check for err
-  if (err) {
-    console.log('ERROR: ' + err)
-  } else {
-    console.log('kv keys: ' + keys)
-  // console.log('kv keys[0]: [' + keys[0] + ']')
-  }
-// keys is array of strings like ['key1', 'key2', 'baz3']
-})
 
-// // see if we can get the JIRA uid from beepboop persist
-// kv.get('uid', function (err, val) {
-//   if (err) {
-//     console.log('uid not found in Persist!')
-//   } else {
-//     console.log('Found uid in Persist: [' + val + ']')
-//   }
-// })
-
+// this works - the trick is to make sure the serialize option is false (above)
 kv.list('jirauserid', function (err, keys) {
   if (err) {
     console.log('ERROR: Cannot find jirauserid kv')
