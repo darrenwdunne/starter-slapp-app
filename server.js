@@ -29,6 +29,16 @@ kv.list(function (err, keys) {
 // keys is array of strings like ['key1', 'key2', 'baz3']
 })
 
+// see if we can get the JIRA uid from beepboop persist
+kv.get('uid', function (err, val) {
+  if (err) {
+    console.log('uid not found in Persist')
+  } else {
+    console.log('Found uid in Persist: [' + val + ']')
+  }
+})
+
+
 var HELP_TEXT = `
 I will respond to the following messages:
 \`help\` - to see this message.
