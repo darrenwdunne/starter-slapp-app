@@ -42,6 +42,7 @@ kv.list('uid', function (err, keys) {
   if (err) {
     console.log('Error while finding uid from kv')
   }
+  console.log('found uid - attempt to get value')
   if (!err && keys.length) {
     kv.get('github_token', function (err, val) {
       if (!err && val) {
