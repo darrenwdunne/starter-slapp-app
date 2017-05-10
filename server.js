@@ -7,7 +7,7 @@ const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
 const BeepBoopPersist = require('beepboop-persist')
-var kv = BeepBoopPersist({serialize: false})
+var kv = BeepBoopPersist({serialize: false}) // otherwise, slapp persist will attempt to JSON.parse the uid
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
@@ -39,17 +39,17 @@ kv.list(function (err, keys) {
 //   }
 // })
 
-kv.list('uid', function (err, keys) {
+kv.list('jirauserid', function (err, keys) {
   if (err) {
-    console.log('Error while finding uid from kv')
+    console.log('ERROR: Cannot find jirauserid kv')
   }
-  console.log('found uid - attempt to get value')
+  console.log('found jirauserid - attempt to get value')
   if (!err && keys.length) {
-    kv.get('uid', function (err, val) {
+    kv.get('jirauserid', function (err, val) {
       if (!err && val) {
-        console.log('uid found and set to ' + val)
+        console.log('jirauserid found and set to ' + val)
       } else {
-        console.log('uid not found on the kv')
+        console.log('jirauserid not found on the kv')
       }
     })
   }
