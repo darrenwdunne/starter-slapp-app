@@ -24,20 +24,34 @@ kv.list(function (err, keys) {
     console.log('ERROR: ' + err)
   } else {
     console.log('kv keys: ' + keys)
-    // console.log('kv keys[0]: [' + keys[0] + ']')
+  // console.log('kv keys[0]: [' + keys[0] + ']')
   }
 // keys is array of strings like ['key1', 'key2', 'baz3']
 })
 
-// see if we can get the JIRA uid from beepboop persist
-kv.get('uid', function (err, val) {
+// // see if we can get the JIRA uid from beepboop persist
+// kv.get('uid', function (err, val) {
+//   if (err) {
+//     console.log('uid not found in Persist!')
+//   } else {
+//     console.log('Found uid in Persist: [' + val + ']')
+//   }
+// })
+
+kv.list('uid', function (err, keys) {
   if (err) {
-    console.log('uid not found in Persist!')
-  } else {
-    console.log('Found uid in Persist: [' + val + ']')
+    console.log('Error while finding uid from kv')
+  }
+  if (!err && keys.length) {
+    kv.get('github_token', function (err, val) {
+      if (!err && val) {
+        console.log('uid found and set to ' + val)
+      } else {
+        console.log('uid not found on the kv')
+      }
+    })
   }
 })
-
 
 var HELP_TEXT = `
 I will respond to the following messages:
