@@ -116,13 +116,12 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
           color: color
         }]
       })
-    })
-      .catch((err) => {
-        console.log(err)
-        msg.say({
-          text: "Sorry, couldn't find " + issueKey + ' :cry:'
-        })
+    }).catch((err) => {
+      console.log(err)
+      msg.say({
+        text: "Sorry, couldn't find " + issueKey + ' :cry:'
       })
+    })
   }
 })
 
