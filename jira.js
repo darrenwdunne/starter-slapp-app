@@ -18,12 +18,13 @@ module.exports.getIssue = function (jiraurl, jirau, jirap, issue) {
           if (error) {
             console.error('Error: ' + error)
           } else {
-            // results is already json data
             var jiraData = JSON.parse(results)
-            const issue = jiraData.issues[0]
-            console.log('jiraData: ' + jiraData)
-            // var changelog = jiraData.issues[0].changelog
-            resolve(issue)
+            if (jiraData.issues[0] === undefined) {
+              console.error('Error: issue not found')
+            } else {
+              // var changelog = jiraData.issues[0].changelog
+              resolve(jiraData.issues[0])
+            }
           }
         }
       )
