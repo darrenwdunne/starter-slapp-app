@@ -61,6 +61,13 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
         title: issueKey + ': ' + jiraIssue.fields.summary,
         // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
         title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+        'fields': [
+          {
+            'title': 'Priority',
+            'value': jiraIssue.fields.priority,
+            'short': true
+          }
+        ],
         color: '#7CD197'
       }]
     }))
