@@ -1,13 +1,10 @@
 'use strict'
 
-// comment
-
 const express = require('express')
 const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
-const BeepBoopPersist = require('beepboop-persist')
-var kv = BeepBoopPersist({serialize: false}) // otherwise, slapp persist will attempt to JSON.parse the uid
+const persist = require('./persist')
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
@@ -19,23 +16,6 @@ var slapp = Slapp({
   context: Context()
 })
 
-// this works - the trick is to make sure the serialize option is false (above)
-kv.list('jirauserid', function (err, keys) {
-  if (err) {
-    console.log('ERROR: Cannot find jirauserid kv')
-  }
-  console.log('found jirauserid - attempt to get value')
-  if (!err && keys.length) {
-    kv.get('jirauserid', function (err, val) {
-      if (!err && val) {
-        console.log('jirauserid found and set to ' + val)
-      } else {
-        console.log('jirauserid not found on the kv')
-      }
-    })
-  }
-})
-
 var HELP_TEXT = `
 I will respond to the following messages:
 \`help\` - to see this message.
@@ -44,6 +24,9 @@ I will respond to the following messages:
 \`<type-any-other-text>\` - to demonstrate a random emoticon response, some of the time :wink:.
 \`attachment\` - to see a Slack attachment message.
 `
+
+const jirauserid = persist.getJiraUserid()
+console.log('jirauserid = ' + jirauserid)
 
 // *********************************************
 // Setup different handlers for messages
@@ -59,17 +42,6 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   var text = (msg.body.event && msg.body.event.text) || ''
   var pattern = /px-(\d+)/ig
   var match = text.match(pattern)
-
-  kv.list(function (err, keys) {
-    // check for err
-    if (err) {
-      console.log('ERROR: ' + err)
-    } else {
-      console.log('inside msg kv keys: ' + keys)
-      console.log('inside msg kv keys[0]: [' + keys[0] + ']')
-    }
-  // keys is array of strings like ['key1', 'key2', 'baz3']
-  })
 
   // kv.get(keys[0], (err, list) => {
   //   if (err) return console.log('Error geting repo from webhook', err)
