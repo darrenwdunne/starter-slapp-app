@@ -96,11 +96,11 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
           title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
           mrkdwn_in: ['fields'],
           'fields': [
-            {
-              'title': 'Priority',
-              'value': '`' + jiraIssue.fields.priority.name + '`',
-              'short': true
-            },
+            // {
+            //   'title': 'Priority',
+            //   'value': '`' + jiraIssue.fields.priority.name + '`',
+            //   'short': true
+            // },
             {
               'title': 'Assignee',
               'value': jiraIssue.fields.assignee === null ? 'Unassigned' : jiraIssue.fields.assignee.displayName,
@@ -110,12 +110,12 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
               'title': 'Status',
               'value': '`' + jiraIssue.fields.status.name + '`',
               'short': true
-            },
-            {
-              'title': 'Type',
-              'value': jiraIssue.fields.issuetype.name,
-              'short': true
             }
+            // {
+            //   'title': 'Type',
+            //   'value': jiraIssue.fields.issuetype.name,
+            //   'short': true
+            // }
 
           ],
           color: color
