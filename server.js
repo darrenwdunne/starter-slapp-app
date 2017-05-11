@@ -25,7 +25,11 @@ I will respond to the following messages:
 \`attachment\` - to see a Slack attachment message.
 `
 
-const jiraU = persist.getJiraU().then((jiravals) => console.log('jiravals = ' + jiravals.jirau + ' '+ jiravals.jirap))
+const jiraU = persist.getJiraU()
+  .then((jiravals) => console.log('jiravals = ' + jiravals.jirau + ' ' + jiravals.jirap))
+  .catch(function (err) {
+    console.error('Promise Rejected: ' + err)
+  })
 
 // const jiraP = persist.getJiraP()
 console.log('outside jiraU = ' + jiraU)

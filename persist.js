@@ -29,16 +29,15 @@ var kv = BeepBoopPersist({serialize: false}) // need to set this to false, other
 // }
 
 module.exports.getJiraU = function () {
-  // return new pending promise
   return new Promise((resolve, reject) => {
     // this works - the trick is to make sure the serialize option is false (above)
     kv.get('jirau', function (err, val) {
       if (!err && val) {
-        console.log('jirau found and set to ' + val)
+        // console.log('jirau found and set to ' + val)
         const jirau = val
         kv.get('jirap', function (err, val) {
           if (!err && val) {
-            console.log('jirap found and set to ' + val)
+            // console.log('jirap found and set to ' + val)
             const jirap = val
             resolve({
               jirau: jirau, jirap: jirap
@@ -48,7 +47,7 @@ module.exports.getJiraU = function () {
           }
         })
       } else {
-        reject(new Error('ERROR: jirap not found on the kv'))
+        reject(new Error('ERROR: jirau not found on the kv'))
       }
     })
   })
