@@ -65,7 +65,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
         attachments: [{
           text: '',
           title: issueKey + ': ' + jiraIssue.fields.summary,
-          image_url: avatarUrl,
+          thumb_url: avatarUrl,
           title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
           mrkdwn_in: ['Priority', 'Status'],
           'fields': [
