@@ -64,9 +64,20 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
         'fields': [
           {
             'title': 'Priority',
-            'value': jiraIssue.fields.priority,
+            'value': jiraIssue.fields.priority.name,
+            'short': true
+          },
+          {
+            'title': 'Assignee',
+            'value': jiraIssue.fields.assignee.displayName,
+            'short': true
+          },
+          {
+            'title': 'Status',
+            'value': jiraIssue.fields.status.name,
             'short': true
           }
+
         ],
         color: '#7CD197'
       }]
