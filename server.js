@@ -58,15 +58,15 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
       text: '',
       // text: 'Proximus JIRA issue ' + issueKey,
       attachments: [{
-        text: issueKey + ': ' + jiraIssue.fields.summary,
+        text: '',
         title: issueKey + ': ' + jiraIssue.fields.summary,
         image_url: jiraIssue.fields.assignee.avatarUrls['24x24'],
         title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+        mrkdwn_in: ['Priority', 'Status'],
         'fields': [
           {
             'title': 'Priority',
             'value': '`' + jiraIssue.fields.priority.name + '`',
-            'mrkdwn': true,
             'short': true
           },
           {
@@ -77,7 +77,6 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
           {
             'title': 'Status',
             'value': '`' + jiraIssue.fields.status.name + '`',
-            'mrkdwn': true,
             'short': true
           }
 
