@@ -5,6 +5,7 @@ const Slapp = require('slapp')
 const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
 const persist = require('./persist')
+const jira = require('./jira')
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
@@ -25,18 +26,15 @@ I will respond to the following messages:
 \`attachment\` - to see a Slack attachment message.
 `
 
-const jiraU = persist.getJiraU()
+persist.getCreds()
   .then((jiravals) => console.log('jiravals = ' + jiravals.jirau + ' ' + jiravals.jirap))
   .catch(function (err) {
     console.error('Promise Rejected: ' + err)
   })
 
-// const jiraP = persist.getJiraP()
-console.log('outside jiraU = ' + jiraU)
-
 // *********************************************
-// Setup different handlers for messages
-// *********************************************
+  // Setup different handlers for messages
+  // *********************************************
 
 // response to the user typing "help"
 slapp.message('help', ['mention', 'direct_message'], (msg) => {
@@ -49,36 +47,20 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   var pattern = /px-(\d+)/ig
   var match = text.match(pattern)
 
-  // kv.get(keys[0], (err, list) => {
-  //   if (err) return console.log('Error geting repo from webhook', err)
-  //   list = list || []
-  //   list.forEach((vall) => {
-  //     console.log('vall=[' + vall + ']')
-  //   })
-  // })
-
-  // // see if we can get the JIRA uid from beepboop persist
-  // kv.get('uid', function (err, val) {
-  //   if (err) {
-  //     console.log('uid not found in Persist')
-  //   } else {
-  //     console.log('Found uid in Persist: [' + val + ']')
-  //   }
-  // })
-
   // there may be multiple issues in the text
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
-    msg.say({
-      text: 'Proximus JIRA issue ' + issueKey,
-      attachments: [{
-        // text: 'more text',
-        title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-        // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
-        title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-        color: '#7CD197'
-      }]
-    })
+    jira.getIssue(issueKey).then((jiraIssue) =>
+      msg.say({
+        text: 'Proximus JIRA issue ' + issueKey,
+        attachments: [{
+          // text: 'more text',
+          title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+          // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
+          title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+          color: '#7CD197'
+        }]
+      }))
   }
 })
 

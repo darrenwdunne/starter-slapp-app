@@ -6,29 +6,7 @@
 const BeepBoopPersist = require('beepboop-persist')
 var kv = BeepBoopPersist({serialize: false}) // need to set this to false, otherwise, slapp persist will attempt to JSON.parse the uid in the kv.get call below
 
-// const getContent = function(url) {
-//   // return new pending promise
-//   return new Promise((resolve, reject) => {
-//     // select http or https module, depending on reqested url
-//     const lib = url.startsWith('https') ? require('https') : require('http')
-//     const request = lib.get(url, (response) => {
-//       // handle http errors
-//       if (response.statusCode < 200 || response.statusCode > 299) {
-//          reject(new Error('Failed to load page, status code: ' + response.statusCode))
-//        }
-//       // temporary data holder
-//       const body = []
-//       // on every content chunk, push it to the data array
-//       response.on('data', (chunk) => body.push(chunk))
-//       // we are done, resolve promise with those joined chunks
-//       response.on('end', () => resolve(body.join('')))
-//     })
-//     // handle connection errors of the request
-//     request.on('error', (err) => reject(err))
-//     })
-// }
-
-module.exports.getJiraU = function () {
+module.exports.getCreds = function () {
   return new Promise((resolve, reject) => {
     // this works - the trick is to make sure the serialize option is false (above)
     kv.get('jirau', function (err, val) {
@@ -53,23 +31,3 @@ module.exports.getJiraU = function () {
   })
 }
 
-// module.exports.getJiraP = function () {
-//   var jirap = ''
-//   // this works - the trick is to make sure the serialize option is false (above)
-//   kv.list('jirap', function (err, keys) {
-//     if (err) {
-//       console.log('ERROR: Cannot find jirap kv')
-//     }
-//     if (!err && keys.length) {
-//       kv.get('jirap', function (err, val) {
-//         if (!err && val) {
-//           console.log('jirap found and set to ' + val)
-//           jirap = val
-//         } else {
-//           console.log('ERROR: jirap not found on the kv')
-//         }
-//         return jirap
-//       })
-//     }
-//   })
-// }
