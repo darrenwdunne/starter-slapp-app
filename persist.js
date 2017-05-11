@@ -17,8 +17,16 @@ module.exports.getCreds = function () {
           if (!err && val) {
             // console.log('jirap found and set to ' + val)
             const jirap = val
-            resolve({
-              jirau: jirau, jirap: jirap
+            kv.get('jiraurl', function (err, val) {
+              if (!err && val) {
+                // console.log('jiraurl found and set to ' + val)
+                const jiraurl = val
+                resolve({
+                  jirau: jirau, jirap: jirap, jiraurl: jiraurl
+                })
+              } else {
+                reject(new Error('ERROR: jiraurl not found on the kv'))
+              }
             })
           } else {
             reject(new Error('ERROR: jirap not found on the kv'))

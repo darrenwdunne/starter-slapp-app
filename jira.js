@@ -1,20 +1,36 @@
 const request = require('request')
 
-module.exports.getIssue = function (issue) {
+module.exports.getIssue = function (jiraurl, jirau, jirap, issue) {
   return new Promise((resolve, reject) => {
     if (issue === undefined) {
       reject(new Error('ERROR: need to provide issue'))
     } else {
+      const URL = jiraurl + '/rest/api/2/search?jql=key=' + issue + '&startAt=0&maxResults=15&fields=summary,assignee,status,priority,key,changelog&expand=changelog'
       console.log('fetching issue ' + issue)
-      resolve({
-        summary: 'summary goes here', assignee: 'assignee goes here'
-      })
+      request(
+        {
+          url: URL,
+          headers: {
+            'Authorization': 'Basic ' + new Buffer(jirau + ':' + jirap).toString('base64')
+          }
+        },
+        function (error, response, results) {
+          if (error) {
+            console.error('Error: ' + error)
+          } else {
+            // results is already json data
+            var jiraData = JSON.parse(results)
+            console.log('jiraData: ' + jiraData)
+            // var changelog = jiraData.issues[0].changelog
+            resolve({
+              summary: jiraData.summary, assignee: jiraData.assignee
+            })
+          }
+        }
+      )
     }
   })
 }
-
-// const QUERY_STR = "key = " + issue
-// const URL = opt.jiraurl + '/rest/api/2/search?jql=key='+issue+'&startAt=0&maxResults=15&fields=summary,key,changelog&expand=changelog'
 
 // console.log('Querying: ' + QUERY_STR)
 // console.time('query')
