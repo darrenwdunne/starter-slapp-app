@@ -21,9 +21,9 @@ module.exports.getJiraU = function () {
         } else {
           console.log('ERROR: jirau not found on the kv')
         }
+        return jirau
       })
     }
-    return jirau
   })
 }
 
@@ -42,8 +42,8 @@ module.exports.getJiraP = function () {
         } else {
           console.log('ERROR: jirap not found on the kv')
         }
+        return jirap
       })
     }
-    return jirap
   })
 }
