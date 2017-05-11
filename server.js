@@ -76,7 +76,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
             },
             {
               'title': 'Assignee',
-              'value': jiraIssue.fields.assignee === undefined ? 'Unassigned' : jiraIssue.fields.assignee.displayName,
+              'value': jiraIssue.fields.assignee === null ? 'Unassigned' : jiraIssue.fields.assignee.displayName,
               'short': true
             },
             {
