@@ -30,7 +30,7 @@ I will respond to the following messages:
 persist.getCreds()
   .then(jiravals => {
     jiraConfig = jiravals
-    console.log('jiravals = ' + jiravals.jirau + ' ' + jiravals.jirap)
+  // console.log('jiravals = ' + jiravals.jirau + ' ' + jiravals.jirap)
   })
   .catch(function (err) {
     console.error('Promise Rejected: ' + err)
@@ -64,6 +64,11 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
         color: '#7CD197'
       }]
     }))
+      .catch((err) => {
+        msg.say({
+          text: err
+        })
+      })
   }
 })
 
