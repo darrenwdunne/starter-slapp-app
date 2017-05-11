@@ -25,10 +25,10 @@ I will respond to the following messages:
 \`attachment\` - to see a Slack attachment message.
 `
 
-const jiraU = persist.getJiraU()
-console.log('jiraU = ' + jiraU)
-const jiraP = persist.getJiraP()
-console.log('jiraP = ' + jiraP)
+const jiraU = persist.getJiraU().then((jiraU) => console.log('jiraU = ' + jiraU))
+
+// const jiraP = persist.getJiraP()
+console.log('outside jiraU = ' + jiraU)
 
 // *********************************************
 // Setup different handlers for messages
