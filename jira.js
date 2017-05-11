@@ -3,9 +3,9 @@ const request = require('request')
 module.exports.getIssue = function (issue) {
   return new Promise((resolve, reject) => {
     if (issue === undefined) {
-      reject(new Error("ERROR: need to provide issue"))
+      reject(new Error('ERROR: need to provide issue'))
     } else {
-      console.log('fetching issue '+issue)
+      console.log('fetching issue ' + issue)
       resolve({
         summary: 'summary goes here', assignee: 'assignee goes here'
       })
@@ -16,9 +16,8 @@ module.exports.getIssue = function (issue) {
 // const QUERY_STR = "key = " + issue
 // const URL = opt.jiraurl + '/rest/api/2/search?jql=key='+issue+'&startAt=0&maxResults=15&fields=summary,key,changelog&expand=changelog'
 
-
 // console.log('Querying: ' + QUERY_STR)
-// console.time('query');
+// console.time('query')
 // request(
 //     {
 //         url: URL,
@@ -30,6 +29,6 @@ module.exports.getIssue = function (issue) {
 //         // results is already json data
 //         var jiraData = JSON.parse(results)
 //         var changelog = jiraData.issues[0].changelog
-//         console.timeEnd('query');
+//         console.timeEnd('query')
 //     }
-// );
+// )

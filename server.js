@@ -52,7 +52,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
     const issueKey = match[i].toUpperCase()
     jira.getIssue(issueKey).then((jiraIssue) =>
       msg.say({
-        text: 'Proximus JIRA issue ' + issueKey,
+        text: 'Proximus JIRA issue ' + issueKey + ':' + jiraIssue.summary,
         attachments: [{
           // text: 'more text',
           title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
