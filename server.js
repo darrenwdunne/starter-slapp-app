@@ -50,17 +50,16 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // there may be multiple issues in the text
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
-    jira.getIssue(issueKey).then((jiraIssue) =>
-      msg.say({
-        text: 'Proximus JIRA issue ' + issueKey + ':' + jiraIssue.summary,
-        attachments: [{
-          // text: 'more text',
-          title: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-          // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
-          title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-          color: '#7CD197'
-        }]
-      }))
+    jira.getIssue(issueKey).then((jiraIssue) => msg.say({
+      text: 'Proximus JIRA issue ' + issueKey,
+      attachments: [{
+        text: issueKey + ': ' + jiraIssue.summary,
+        title: issueKey + ': ' + jiraIssue.summary,
+        // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
+        title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+        color: '#7CD197'
+      }]
+    }))
   }
 })
 
