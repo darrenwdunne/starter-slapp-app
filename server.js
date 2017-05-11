@@ -6,6 +6,7 @@ const ConvoStore = require('slapp-convo-beepboop')
 const Context = require('slapp-context-beepboop')
 const persist = require('./persist')
 const jira = require('./jira')
+var jiraConfig = {}
 
 // use `PORT` env var on Beep Boop - default to 3000 locally
 var port = process.env.PORT || 3000
@@ -27,7 +28,10 @@ I will respond to the following messages:
 `
 
 persist.getCreds()
-  .then((jiravals) => console.log('jiravals = ' + jiravals.jirau + ' ' + jiravals.jirap))
+  .then(jiravals => {
+    jiraConfig = jiravals
+    console.log('jiravals = ' + jiravals.jirau + ' ' + jiravals.jirap)
+  })
   .catch(function (err) {
     console.error('Promise Rejected: ' + err)
   })
@@ -50,7 +54,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // there may be multiple issues in the text
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
-    jira.getIssue(issueKey).then((jiraIssue) => msg.say({
+    jira.getIssue(jiraConfig.jiraurl, jiraConfig.jirau, jiraConfig.jirap, issueKey).then((jiraIssue) => msg.say({
       text: 'Proximus JIRA issue ' + issueKey,
       attachments: [{
         text: issueKey + ': ' + jiraIssue.summary,
