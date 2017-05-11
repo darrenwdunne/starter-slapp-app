@@ -57,8 +57,8 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
     jira.getIssue(jiraConfig.jiraurl, jiraConfig.jirau, jiraConfig.jirap, issueKey).then((jiraIssue) => msg.say({
       text: 'Proximus JIRA issue ' + issueKey,
       attachments: [{
-        text: issueKey + ': ' + jiraIssue.summary,
-        title: issueKey + ': ' + jiraIssue.summary,
+        text: issueKey + ': ' + jiraIssue.fields.summary,
+        title: issueKey + ': ' + jiraIssue.fields.summary,
         // image_url: 'https://storage.googleapis.com/beepboophq/_assets/bot-1.22f6fb.png',
         title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
         color: '#7CD197'

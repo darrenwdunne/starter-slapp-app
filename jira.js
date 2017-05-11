@@ -20,11 +20,10 @@ module.exports.getIssue = function (jiraurl, jirau, jirap, issue) {
           } else {
             // results is already json data
             var jiraData = JSON.parse(results)
+            const issue = jiraData.issues[0]
             console.log('jiraData: ' + jiraData)
             // var changelog = jiraData.issues[0].changelog
-            resolve({
-              summary: jiraData.summary, assignee: jiraData.assignee
-            })
+            resolve(issue)
           }
         }
       )
