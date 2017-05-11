@@ -59,6 +59,18 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
       if (jiraIssue.fields.assignee != null) {
         avatarUrl = jiraIssue.fields.assignee.avatarUrls['24x24']
       }
+      var color = 'good'
+      switch (jiraIssue.fields.priority.name) {
+        case 'Open':
+          color = 'good'
+          break
+        case 'High':
+          color = 'danger'
+          break
+        case 'Medium':
+          color = 'warning'
+          break
+      }
       msg.say({
         text: '',
         // text: 'Proximus JIRA issue ' + issueKey,
@@ -86,7 +98,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
             }
 
           ],
-          color: '#7CD197'
+          color: color
         }]
       })
     })
