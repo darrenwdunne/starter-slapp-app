@@ -54,36 +54,42 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   // there may be multiple issues in the text
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
-    jira.getIssue(jiraConfig.jiraurl, jiraConfig.jirau, jiraConfig.jirap, issueKey).then((jiraIssue) => msg.say({
-      text: '',
-      // text: 'Proximus JIRA issue ' + issueKey,
-      attachments: [{
+    jira.getIssue(jiraConfig.jiraurl, jiraConfig.jirau, jiraConfig.jirap, issueKey).then(jiraIssue => {
+      var avatarUrl = null
+      if (jiraIssue.fields.assignee != null) {
+        avatarUrl = jiraIssue.fields.assignee.avatarUrls['24x24']
+      }
+      msg.say({
         text: '',
-        title: issueKey + ': ' + jiraIssue.fields.summary,
-        image_url: jiraIssue.fields.assignee.avatarUrls['24x24'],
-        title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-        mrkdwn_in: ['Priority', 'Status'],
-        'fields': [
-          {
-            'title': 'Priority',
-            'value': '`' + jiraIssue.fields.priority.name + '`',
-            'short': true
-          },
-          {
-            'title': 'Assignee',
-            'value': jiraIssue.fields.assignee.displayName,
-            'short': true
-          },
-          {
-            'title': 'Status',
-            'value': '`' + jiraIssue.fields.status.name + '`',
-            'short': true
-          }
+        // text: 'Proximus JIRA issue ' + issueKey,
+        attachments: [{
+          text: '',
+          title: issueKey + ': ' + jiraIssue.fields.summary,
+          image_url: avatarUrl,
+          title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
+          mrkdwn_in: ['Priority', 'Status'],
+          'fields': [
+            {
+              'title': 'Priority',
+              'value': '`' + jiraIssue.fields.priority.name + '`',
+              'short': true
+            },
+            {
+              'title': 'Assignee',
+              'value': jiraIssue.fields.assignee === undefined ? 'Unassigned' : jiraIssue.fields.assignee.displayName,
+              'short': true
+            },
+            {
+              'title': 'Status',
+              'value': '`' + jiraIssue.fields.status.name + '`',
+              'short': true
+            }
 
-        ],
-        color: '#7CD197'
-      }]
-    }))
+          ],
+          color: '#7CD197'
+        }]
+      })
+    })
       .catch((err) => {
         console.log(err)
         msg.say({
