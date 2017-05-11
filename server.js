@@ -94,7 +94,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
           title: issueKey + ': ' + jiraIssue.fields.summary,
           thumb_url: avatarUrl,
           title_link: 'https://inmotionnow.atlassian.net/browse/' + issueKey,
-          mrkdwn_in: ['Priority', 'Status'],
+          mrkdwn_in: ['fields'],
           'fields': [
             {
               'title': 'Priority',
@@ -109,6 +109,11 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
             {
               'title': 'Status',
               'value': '`' + jiraIssue.fields.status.name + '`',
+              'short': true
+            },
+            {
+              'title': 'Type',
+              'value': jiraIssue.fields.issuetype.name,
               'short': true
             }
 
