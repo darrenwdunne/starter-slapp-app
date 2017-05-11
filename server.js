@@ -60,15 +60,30 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
         avatarUrl = jiraIssue.fields.assignee.avatarUrls['24x24']
       }
       var color = 'good'
-      switch (jiraIssue.fields.priority.name) {
-        case 'Open':
-          color = 'good'
+      switch (jiraIssue.fields.issuetype.name) {
+        case 'Bug':
+        case 'Bug-task':
+          switch (jiraIssue.fields.priority.name) {
+            case 'Open':
+              color = 'good'
+              break
+            case 'High':
+              color = 'danger'
+              break
+            case 'Medium':
+              color = 'warning'
+              break
+          }
           break
-        case 'High':
-          color = 'danger'
+        case 'Story':
+          color = '#63BA3C'
           break
-        case 'Medium':
-          color = 'warning'
+        case 'Task':
+        case 'Sub-task':
+          color = '#4BADE8'
+          break
+        case 'Epic':
+          color = '#904EE2'
           break
       }
       msg.say({
