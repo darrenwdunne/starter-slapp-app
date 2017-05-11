@@ -25,7 +25,7 @@ I will respond to the following messages:
 \`attachment\` - to see a Slack attachment message.
 `
 
-const jiraU = persist.getJiraU().then((jiraU) => console.log('jiraU = ' + jiraU))
+const jiraU = persist.getJiraU().then((jiravals) => console.log('jiravals = ' + jiravals.jirau + ' '+ jiravals.jirap))
 
 // const jiraP = persist.getJiraP()
 console.log('outside jiraU = ' + jiraU)
