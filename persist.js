@@ -23,8 +23,8 @@ module.exports.getJiraU = function () {
         }
       })
     }
+    return jirau
   })
-  return jirau
 }
 
 module.exports.getJiraP = function () {
@@ -44,6 +44,6 @@ module.exports.getJiraP = function () {
         }
       })
     }
+    return jirap
   })
-  return jirap
 }
