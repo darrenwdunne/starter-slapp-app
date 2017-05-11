@@ -57,7 +57,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
     jira.getIssue(jiraConfig.jiraurl, jiraConfig.jirau, jiraConfig.jirap, issueKey).then(jiraIssue => {
       var avatarUrl = null
       if (jiraIssue.fields.assignee != null) {
-        avatarUrl = jiraIssue.fields.assignee.avatarUrls['24x24']
+        avatarUrl = jiraIssue.fields.assignee.avatarUrls['32x32']
       }
       var color = 'good'
       switch (jiraIssue.fields.issuetype.name) {
