@@ -55,7 +55,8 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   for (var i = 0; i < match.length; i++) {
     const issueKey = match[i].toUpperCase()
     jira.getIssue(jiraConfig.jiraurl, jiraConfig.jirau, jiraConfig.jirap, issueKey).then((jiraIssue) => msg.say({
-      text: 'Proximus JIRA issue ' + issueKey,
+      text: '',
+      // text: 'Proximus JIRA issue ' + issueKey,
       attachments: [{
         text: issueKey + ': ' + jiraIssue.fields.summary,
         title: issueKey + ': ' + jiraIssue.fields.summary,
@@ -64,7 +65,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
         'fields': [
           {
             'title': 'Priority',
-            'value': jiraIssue.fields.priority.name,
+            'value': '`' + jiraIssue.fields.priority.name + '`',
             'short': true
           },
           {
@@ -74,7 +75,7 @@ slapp.message(/px-(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
           },
           {
             'title': 'Status',
-            'value': jiraIssue.fields.status.name,
+            'value': '`' + jiraIssue.fields.status.name + '`',
             'short': true
           }
 
