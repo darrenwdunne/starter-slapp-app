@@ -25,8 +25,10 @@ I will respond to the following messages:
 \`attachment\` - to see a Slack attachment message.
 `
 
-const jirauserid = persist.getJiraUserid()
-console.log('jirauserid = ' + jirauserid)
+const jiraU = persist.getJiraU()
+console.log('jiraU = ' + jiraU)
+const jiraP = persist.getJiraP()
+console.log('jiraP = ' + jiraP)
 
 // *********************************************
 // Setup different handlers for messages

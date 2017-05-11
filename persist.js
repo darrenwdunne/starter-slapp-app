@@ -6,24 +6,44 @@
 const BeepBoopPersist = require('beepboop-persist')
 var kv = BeepBoopPersist({serialize: false}) // need to set this to false, otherwise, slapp persist will attempt to JSON.parse the uid in the kv.get call below
 
-module.exports.getJiraUserid = function () {
-  var jirauserid = ''
+module.exports.getJiraU = function () {
+  var jirau = ''
   // this works - the trick is to make sure the serialize option is false (above)
-  kv.list('jirauserid', function (err, keys) {
+  kv.list('jirau', function (err, keys) {
     if (err) {
-      console.log('ERROR: Cannot find jirauserid kv')
+      console.log('ERROR: Cannot find jirau kv')
     }
-    // console.log('found jirauserid - attempt to get value')
     if (!err && keys.length) {
-      kv.get('jirauserid', function (err, val) {
+      kv.get('jirau', function (err, val) {
         if (!err && val) {
-          console.log('jirauserid found and set to ' + val)
-          jirauserid = val
+          console.log('jirau found and set to ' + val)
+          jirau = val
         } else {
-          console.log('ERROR: jirauserid not found on the kv')
+          console.log('ERROR: jirau not found on the kv')
         }
       })
     }
   })
-  return jirauserid
+  return jirau
+}
+
+module.exports.getJiraP = function () {
+  var jirap = ''
+  // this works - the trick is to make sure the serialize option is false (above)
+  kv.list('jirap', function (err, keys) {
+    if (err) {
+      console.log('ERROR: Cannot find jirap kv')
+    }
+    if (!err && keys.length) {
+      kv.get('jirap', function (err, val) {
+        if (!err && val) {
+          console.log('jirap found and set to ' + val)
+          jirap = val
+        } else {
+          console.log('ERROR: jirap not found on the kv')
+        }
+      })
+    }
+  })
+  return jirap
 }
