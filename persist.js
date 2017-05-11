@@ -10,65 +10,66 @@ var kv = BeepBoopPersist({serialize: false}) // need to set this to false, other
 //   // return new pending promise
 //   return new Promise((resolve, reject) => {
 //     // select http or https module, depending on reqested url
-//     const lib = url.startsWith('https') ? require('https') : require('http');
+//     const lib = url.startsWith('https') ? require('https') : require('http')
 //     const request = lib.get(url, (response) => {
 //       // handle http errors
 //       if (response.statusCode < 200 || response.statusCode > 299) {
-//          reject(new Error('Failed to load page, status code: ' + response.statusCode));
+//          reject(new Error('Failed to load page, status code: ' + response.statusCode))
 //        }
 //       // temporary data holder
-//       const body = [];
+//       const body = []
 //       // on every content chunk, push it to the data array
-//       response.on('data', (chunk) => body.push(chunk));
+//       response.on('data', (chunk) => body.push(chunk))
 //       // we are done, resolve promise with those joined chunks
-//       response.on('end', () => resolve(body.join('')));
-//     });
+//       response.on('end', () => resolve(body.join('')))
+//     })
 //     // handle connection errors of the request
 //     request.on('error', (err) => reject(err))
 //     })
-// };
+// }
 
 module.exports.getJiraU = function () {
   // return new pending promise
   return new Promise((resolve, reject) => {
-  var jirau = ''
-  // this works - the trick is to make sure the serialize option is false (above)
-  kv.list('jirau', function (err, keys) {
-    if (err) {
-      console.log('ERROR: Cannot find jirau kv')
-      reject('ERROR: Cannot find jirau kv')
-    }
-    if (!err && keys.length) {
-      kv.get('jirau', function (err, val) {
-        if (!err && val) {
-          console.log('jirau found and set to ' + val)
-          jirau = val
-        } else {
-          console.log('ERROR: jirau not found on the kv')
-        }
-        resolve(jirau)
-      })
-    }
+    var jirau = ''
+    // this works - the trick is to make sure the serialize option is false (above)
+    kv.list('jirau', function (err, keys) {
+      if (err) {
+        console.log('ERROR: Cannot find jirau kv')
+        reject(new Error('ERROR: Cannot find jirau kv'))
+      }
+      if (!err && keys.length) {
+        kv.get('jirau', function (err, val) {
+          if (!err && val) {
+            console.log('jirau found and set to ' + val)
+            jirau = val
+          } else {
+            console.log('ERROR: jirau not found on the kv')
+          }
+          resolve(jirau)
+        })
+      }
+    })
   })
 }
 
-module.exports.getJiraP = function () {
-  var jirap = ''
-  // this works - the trick is to make sure the serialize option is false (above)
-  kv.list('jirap', function (err, keys) {
-    if (err) {
-      console.log('ERROR: Cannot find jirap kv')
-    }
-    if (!err && keys.length) {
-      kv.get('jirap', function (err, val) {
-        if (!err && val) {
-          console.log('jirap found and set to ' + val)
-          jirap = val
-        } else {
-          console.log('ERROR: jirap not found on the kv')
-        }
-        return jirap
-      })
-    }
-  })
-}
+// module.exports.getJiraP = function () {
+//   var jirap = ''
+//   // this works - the trick is to make sure the serialize option is false (above)
+//   kv.list('jirap', function (err, keys) {
+//     if (err) {
+//       console.log('ERROR: Cannot find jirap kv')
+//     }
+//     if (!err && keys.length) {
+//       kv.get('jirap', function (err, val) {
+//         if (!err && val) {
+//           console.log('jirap found and set to ' + val)
+//           jirap = val
+//         } else {
+//           console.log('ERROR: jirap not found on the kv')
+//         }
+//         return jirap
+//       })
+//     }
+//   })
+// }
