@@ -97,8 +97,8 @@ slapp.message(/(ra16-|mds-|px-|vm-|vnow-)(\d+)/i, ['mention', 'direct_message', 
           mrkdwn_in: ['fields'],
           'fields': [
             {
-              'title': 'Priority',
-              'value': '`' + jiraIssue.fields.priority.name + '`',
+              'title': 'Status',
+              'value': '`' + jiraIssue.fields.status.name + '`',
               'short': true
             },
             {
@@ -107,8 +107,8 @@ slapp.message(/(ra16-|mds-|px-|vm-|vnow-)(\d+)/i, ['mention', 'direct_message', 
               'short': true
             },
             {
-              'title': 'Status',
-              'value': '`' + jiraIssue.fields.status.name + '`',
+              'title': 'Priority',
+              'value': '`' + jiraIssue.fields.priority.name + '`',
               'short': true
             },
             {
