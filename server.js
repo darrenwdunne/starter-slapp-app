@@ -48,7 +48,7 @@ slapp.message('help', ['mention', 'direct_message'], (msg) => {
 // Respond to a JIRA issue (e.g. PX-1234)
 slapp.message(/(ra16-|mds-|px-|vm-|vnow-)(\d+)/i, ['mention', 'direct_message', 'ambient'], (msg) => {
   var text = (msg.body.event && msg.body.event.text) || ''
-  var pattern = /px-(\d+)/ig
+  var pattern = /(ra16-|mds-|px-|vm-|vnow-)(\d+)/ig
   var match = text.match(pattern)
 
   // there may be multiple issues in the text
